@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+Current Time: 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script language="javascript">
+	/*$(document).ready(function() {
+		$.ajax({
+			type: "POST",
+			url: "http://www.timeapi.org/utc/now",
+			success: function(msg){
+				alert("Server date : " + msg + "AAA" );
+			}
+		});
+	});*/
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        function fct_showBanner(){
+            $("div#dummyDiv" ).append( "<p>ssssssssss</p>" );
+        }
+      });
+</script>
+    
+    
+
+<script type="text/javascript">
+     var expired = true;
+     
+    var holdTime = {};
+      
+    //var untilWhen = new Date(1399599000000); // Fri May 09 2014 10:30:00 GMT+0900 (JST)
+     
+       var untilWhen = new Date(1399522440000); // 05/08/2014 13:14:00
+      
+      
+      function myCallback(json) {
+        //alert(new Date(json.dateString));
+        //Document.write("The current time: " + new Date(json.dateString));
+        holdTime =   new Date(json.dateString);
+        //document.write(holdTime);
+        //document.write("the info: "+holdTime.getDate()+"  "+holdTime.getHours()+":"+holdTime.getHours()+":"+holdTime.getMinutes()+":"+holdTime.getSeconds() );
+        document.write("    holdtime   |  "+ holdTime.getTime()); 
+        document.write("        untilWhen   |  "+ untilWhen.getTime());
+          
+         if(holdTime.getTime() < untilWhen.getTime()){
+             document.write("   it havent expired yet...");
+             expired = false;
+             //element = document.getElementById("dummyDiv"); 
+             //document.body.innerHTML("<p>TEST SOME DOM</p>"); 
+         }else{
+             document.write("    Banner Expired");
+         }
+        document.write("ahaha   "+holdTime.getTime());
+       
+      }
+       
+     
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            //alert(expired);
+            if(expired == false){
+//                $("div#dummyDiv" ).append( "<p>Banner1</p>" );
+//                $("div#dummyDiv" ).append( "<p>Banner2</p>" );
+//                $("div#dummyDiv" ).append( "<p>Banner3</p>" );
+             $("div#dummyDiv" ).append( "<p>/!\ nothing seems to be expired /!\</p>" );
+            }else{
+                 $("div#dummyDiv" ).append( "<p>/!\ Your content is expired /!\</p>" );
+                 
+                 //We comment the content
+                 comment($('#banner1'));
+            }
+          
+          
+                ////////////////////////////////////////////////
+                //FCT that Will allow content to be commented
+                /////////////////////////////////////////////
+                function comment(element){
+                    element.wrap(function() {
+                        return '<!--' + this.outerHTML + '"-->';
+                    });
+                }
+                
+          });
+          
+          
+    </script>
+    
+    
+    <script type="text/javascript" src="http://timeapi.org/utc/now.json?callback=myCallback"></script>
+<!--    <script type="text/javascript" src="http://www.timeapi.org/utc/now?\a \b \d \I:\M:\S \Z \Y.json?callback=myCallback"></script>-->
+  
+  
+</head>
+<body>
+
+<div id="dummyDiv">
+    <h2>The list of available banners</h2>
+    <p id="banner1">the Banner1 blah</p>
+    
+    <p id="banner2">the Banner2  blah</p>
+    <p id="banner3">the Banner3  blah</p>
+    
+    
+</div>
+
+</body>
+</html>
